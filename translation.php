@@ -38,42 +38,45 @@
 	function translate($text, $from, $to, $data){
 		$text = tokenize($text);
 		$possible_translations = array();
+		$sentence_counts = array();
 
 		foreach ($data as $key => $line_words) {
 			foreach ($text as $token_index => $word) {
 				if($line_words[$from] && in_array($word, $line_words[$from])){
 					foreach ($line_words[$to] as $key => $line_word) {
-						@$possible_translations[$word][$line_word]+=1 / ($possible_translations[$word][$line_word] + 0.1);
+						@$possible_translations[$word][$line_word]+=1 / ($possible_translations[$word][$line_word] + count($line_words[$to]));
 					}
 
 					foreach ($text as $token_index2 => $sub_word) {
 						if(in_array($sub_word, $line_words[$from]) && $sub_word != $word){
 							foreach ($line_words[$to] as $key => $line_word) {
-								@$possible_translations[$word][$line_word]+=1 / ($possible_translations[$word][$line_word] + 0.1);
+								@$possible_translations[$word][$line_word]+=1;
 							}
 						}
 					}
 
 					arsort($possible_translations[$word]);
-					$possible_translations[$word] = array_slice($possible_translations[$word], 0, 4);
+					$possible_translations[$word] = array_slice($possible_translations[$word], 0, 3);
+
+					@$sentence_counts[$word]++;
 				}
 			}
 		}
 
+		print_r($sentence_counts);
 		print_r($possible_translations);
 
 		$output = array();
 
-		foreach ($possible_translations as $key => $words) {
-			$first_match = array_keys($words)[0];
-
-			foreach ($words as $key => $score) {
-				@$output[$key]+=$score;
+		foreach ($possible_translations as $token_key => $words) {
+			foreach ($words as $word => $score) {
+				print_r($sentence_counts[$token_key] / $score);
+				print_r("\n");
+				if($sentence_counts[$token_key] / $score < count($sentence_counts)){
+					$output[] = $word;
+				}
 			}
-			//$output[] = $first_match . ' -> '.$words[$first_match];
 		}
-
-		arsort($output);
 
 		return $output;
 	}
