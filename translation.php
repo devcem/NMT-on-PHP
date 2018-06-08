@@ -131,15 +131,27 @@
 		$output = array();
 
 		foreach ($possible_translations as $token_key => $words) {
+			$avg_score = 0;
+
 			foreach ($words as $word => $score) {
-				@$output[$word]+=$score;
+				$avg_score+=$score;
+			}
+
+			$avg_score = $avg_score / 3;
+
+			foreach ($words as $word => $score) {
+				if($score >= $avg_score){
+					$output[] = $word;
+				}
 			}
 		}
+
+		$output = array_unique($output);
 
 		return $output;
 	}
 
 	$data = transform_array('tur.txt');
-	$translation0 = translate('i want to eat lunch', 0, 1, $data);
+	$translation0 = translate('they will try hard', 0, 1, $data);
 
 	print_r($translation0);
