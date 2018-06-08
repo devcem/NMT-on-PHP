@@ -116,3 +116,14 @@ Array
 ```
 
 It gets better with larger datasets. And i need to solve the relation between words to apply seq2seq feature fully. I'll try to design and optimized loop to get word sequence.
+
+I'm also start to test it with French as well, here is the results :
+
+French input :
+```je ne sais pas quand je vais me réveiller```
+
+Correct translation :
+```i don't know when i'm going to wake up```
+
+English output from algorithm :
+```i don't know when i'm going to wake up```
