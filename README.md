@@ -57,3 +57,58 @@ So you could simply fork and make it work on Dutch.
 
 Also you could download more dataset from this address :
 http://www.manythings.org/anki/
+
+With some improvements, it gets better results and i will continue to work on it. Here is the new results :
+
+English input :
+```i want to eat lunch```
+
+Correct translation :
+```Öğle yemeği yemek istiyorum```
+
+Turkish output from algorithm :
+```Öğle yemeği yemek istiyorum```
+
+Scores of translation :
+```
+Array
+(
+    [i] => Array
+        (
+            [istiyorum] => 369.67920026876
+            [yemek] => 80.770182839243
+            [miyim] => 33.369151618532
+        )
+
+    [eat] => Array
+        (
+            [yemek] => 104.31712927019
+            [istiyorum] => 19.593281973175
+            [zorundayım] => 12.820448362323
+        )
+
+    [to] => Array
+        (
+            [istiyorum] => 261.86594467662
+            [yemek] => 96.651928350944
+            [gitmek] => 46.852823953631
+        )
+
+    [want] => Array
+        (
+            [istiyorum] => 417.0786226173
+            [yemek] => 40.914343194859
+            [onu] => 39.681962494134
+        )
+
+    [lunch] => Array
+        (
+            [yemeği] => 19.30880913996
+            [Öğle] => 11.830944966924
+            [yemedim] => 3.3333333333333
+        )
+
+)
+```
+
+It gets better with larger datasets. And i need to solve the relation between words to apply seq2seq feature fully. I'll try to design and optimized loop to get word sequence.
