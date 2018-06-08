@@ -58,6 +58,10 @@ So you could simply fork and make it work on Dutch.
 Also you could download more dataset from this address :
 http://www.manythings.org/anki/
 
+## Update (v1.1)
+
+I've changed some calculations to get better results. For example i added another score function to determine word repeat counts. It helps to understand if word is rare or not.
+
 With some improvements, it gets better results and i will continue to work on it. Here is the new results :
 
 English input :
